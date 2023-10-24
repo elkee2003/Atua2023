@@ -4,7 +4,6 @@
  *
  * @format
  */
-
 import 'react-native-gesture-handler';
 import React, { useEffect } from 'react';
 import {StatusBar,PermissionsAndroid, Platform} from 'react-native';
@@ -18,10 +17,17 @@ navigator.geolocation = require('@react-native-community/geolocation');
 import RootNavigator from './src/Navigation/Root';
 
 import { Amplify } from 'aws-amplify';
-import awsconfig from './src/aws-exports';
+// import awsconfig from './src/aws-exports';
 
-Amplify.configure(awsconfig);
+// Amplify.configure({
+//   ...awsconfig,
+//   Analytics: {
+//     disabled: true,
+//   },
+// });
 
+import awsExports from './src/aws-exports';
+Amplify.configure(awsExports);
 
 const App = ()=>{
 

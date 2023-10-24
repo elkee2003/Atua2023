@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     drawerContent:{
-        backgroundColor:'#1c1c1b',
+        backgroundColor:'#163010',
         padding:15,
     },
     userRow:{
@@ -38,7 +38,13 @@ const styles = StyleSheet.create({
     makeMoney:{
         color:'white',
         paddingVertical: 5,
-    }
+    },
+    logOut:{
+        padding: 5,
+        paddingLeft:20,
+        color: '#e03737',
+        fontWeight:'bold'
+    },
 })
 
 export default styles;

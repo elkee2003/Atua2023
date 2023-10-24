@@ -1,22 +1,27 @@
 import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 import { DrawerContentScrollView, DrawerItemList, } from '@react-navigation/drawer';
+import { Auth } from 'aws-amplify';
 import styles from './styles';
+import { useAuthContext } from '../contexts/AuthContext';
 
 const CustomDrawer = (props) => {
+  const {dbUser} = useAuthContext()
+
   return (
     <DrawerContentScrollView {...props}>
       <View style={styles.drawerContent}>
         {/* User Row */}
-        <View style={styles.userRow}>
+        <Pressable onPress={()=>props.navigation.navigate('ProfileScreen')}>
+          <View style={styles.userRow}>
             <View style={styles.userImage}/>
             <View>
-                <Text style={styles.userProfile}>Elkanah Inko-Tariah</Text>
+                <Text style={styles.userProfile}>{dbUser?.name}</Text>
                 <Text style={styles.userRate}>5.00 *</Text>
             </View>
-            
         </View>
-
+        </Pressable>
+        
         {/* Messages Row */}
         <Pressable onPress={()=>console.warn('Messages')}>
             <Text style={styles.messageRow}>
@@ -41,6 +46,13 @@ const CustomDrawer = (props) => {
       </View>
 
       <DrawerItemList {...props}/>
+
+            {/* logout */}
+      <Pressable onPress={()=>{Auth.signOut()}}>
+        <Text style={styles.logOut}>
+                Logout
+        </Text>
+      </Pressable>
     </DrawerContentScrollView>
   )
 }

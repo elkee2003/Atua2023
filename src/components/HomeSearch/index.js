@@ -4,6 +4,7 @@ import React from 'react'
 import styles from './styles'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
 import { useNavigation } from '@react-navigation/native'
 
@@ -11,20 +12,19 @@ const HomeSearch = () => {
 
   const navigation = useNavigation()
 
-  const goToSearch = ()=>{
+  const goToDestinationSearch = ()=>{
     navigation.navigate('DestinationSearch')
+    // navigation.navigate('OrderScreen')
   }
   
   return (
     <View>
         {/* input box */}
-      <Pressable onPress={goToSearch} style={styles.inputBox}>
-        <Text style={styles.inputText}>Send To?
+      <Pressable onPress={goToDestinationSearch} style={styles.inputBox}>
+        <Text style={styles.inputText}>Send To What Location?
         </Text>
-        <View style={styles.timeContainer}>
-           <AntDesign name={'clockcircle'} size={16} color={'#535353'}/>
-           <Text>Now</Text>
-           <MaterialIcons name={'keyboard-arrow-down'} size={16}/>
+        <View style={styles.orderContainer}>
+           <MaterialCommunityIcons name={'card-account-details'} size={30}/>
         </View>
       </Pressable>
 

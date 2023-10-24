@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     inputBox:{
         backgroundColor: '#b0b0b0',
+        borderRadius:20,
         margin: 10,
         padding:10,
         flexDirection: 'row',
@@ -14,11 +15,11 @@ const styles = StyleSheet.create({
         fontWeight:'600',
         color: '#535353'
     },
-    timeContainer:{
+    orderContainer:{
         flexDirection:'row',
-        justifyContent: 'space-between',
-        width:100,
-        padding:10,
+        justifyContent: 'center',
+        width:70,
+        padding:5,
         backgroundColor:'#fff',
         borderRadius:50
     },
