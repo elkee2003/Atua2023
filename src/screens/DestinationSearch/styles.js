@@ -63,6 +63,9 @@ const styles = StyleSheet.create({
         position:'absolute',
         top:80,
         left:15,
+    },
+    gPoweredContainer:{
+        display:'none'
     }
 })
 

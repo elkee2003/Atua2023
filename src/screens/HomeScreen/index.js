@@ -8,7 +8,7 @@ const HomeScreen = () => {
     <View>
       <View style={{height: Dimensions.get('window').height - 300}}>
              <HomeMap/>
-        </View>
+      </View>
 
       {/* Bottom comp */}
       <HomeSearch/>

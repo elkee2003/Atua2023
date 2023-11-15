@@ -1,33 +1,55 @@
-import { View, Image } from 'react-native'
-import React, {useState,useEffect} from 'react'
+import { View, Image, useWindowDimensions, PermissionsAndroid, Platform, } from 'react-native'
+import React, {useState, useEffect} from 'react'
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
+navigator.geolocation = require('@react-native-community/geolocation');
 
 import TMediums from '../../assets/data/TMediums';
 
 const HomeMap = () => {
   
-  // I'm trying to get automatically the currentlocation of the user, I'll come back to it later
+  const {width, height} = useWindowDimensions()
+  const [myPosition, setMyPosition] = useState({})
+  // myPosition useState(null) this is what it's meant to be
 
-  // const [userPosition, setUserPosition] = useState({
-  //   latitude:28.450627,
-  //   longitude:-16.263045,
-  // })
-
-  // useEffect(()=>{
-  //   Geolocation.getCurrentPosition(
-  //     (position) => {
-  //       setUserPosition({
-  //         latitude: position.coords.latitude,
-  //         longitude: position.coords.longitude,
-  //       });
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     },
-  //     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-  //   );
-  // }, [])
+    // useEffect Hook for Location
+    useEffect(() => {
+      const requestLocationPermission = async () => {
+        if (Platform.OS === 'android') {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            {
+              title: 'Atua Location Request',
+              message: 'Atua needs access to your location.',
+              buttonNeutral: 'Ask Me Later',
+              buttonNegative: 'Cancel',
+              buttonPositive: 'OK',
+            },
+          );
+          if (granted === PermissionsAndroid.RESULTS.DENIED) {
+            console.log('Location permission denied');
+            return;
+          }
+        }
+  
+        Geolocation.getCurrentPosition(
+          (position) => {
+            console.log('This is', position)
+            setMyPosition({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            });
+            console.log('show very', myPosition.latitude, myPosition.longitude)
+          },
+          (error) => {
+            console.log(error);
+          },
+          { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+        );
+      };
+  
+      requestLocationPermission();
+    }, []);
 
   const getImage=(type)=>{
     if (type === 'Walk'){
@@ -40,20 +62,21 @@ const HomeMap = () => {
         return require('../../assets/images/top-UberXL.png')
     }
     return require('../../assets/images/Walk.png')
-}
+  }
 
   return (    
-      <MapView
-      style={{height:'100%', width:'100%'}}
-       provider={PROVIDER_GOOGLE} 
-       showsUserLocation={true}
-       region={{
-         latitude: 28.450627,
-         longitude: -16.263045,
-         latitudeDelta: 0.015,
-         longitudeDelta: 0.0121,
-       }}
-     >
+    <MapView
+    style={{width, height:height - 150}}
+    provider={PROVIDER_GOOGLE}
+    showsUserLocation
+    followsUserLocation
+    initialRegion={{
+      latitude: 37.421998,
+      longitude: -122.084,
+      latitudeDelta: 0.0222,
+      longitudeDelta: 0.0121,
+    }}
+    >
 
         {TMediums.map((TMedium)=>{
               return <Marker

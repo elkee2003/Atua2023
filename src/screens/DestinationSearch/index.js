@@ -50,6 +50,7 @@ const DestinationSearch = () => {
                       container: styles.autocompleteContainer,
                       listView:styles.listView,
                       separator:styles.separator,
+                      poweredContainer: styles.gPoweredContainer
                     }}
                     fetchDetails
                     query={{
@@ -76,6 +77,7 @@ const DestinationSearch = () => {
                       container:{...styles.autocompleteContainer,top:55
                       },
                       separator:styles.separator,
+                      poweredContainer: styles.gPoweredContainer
                     }}
                     fetchDetails
                     query={{
