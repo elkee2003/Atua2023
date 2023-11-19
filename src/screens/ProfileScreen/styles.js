@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
       },
       saveBackground:{
         alignItems:'center',
-        backgroundColor:'#0059ff',
+        backgroundColor:'#18b403',
         padding: 15,
       },
 
@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
         // borderWidth:1,
       },
       gContainer:{
-        height:'50%',
+        height:'30%',
+        zIndex:2,
       },
       gTextInput:{
         
@@ -56,8 +57,11 @@ const styles = StyleSheet.create({
       },
       gPoweredContainer:{
         display:'none'
-      }
-      
+      },
+      inputsBelowG:{
+        position:'relative',
+        top:-170,
+      },
 })
 
 export default styles;

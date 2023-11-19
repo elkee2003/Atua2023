@@ -7,7 +7,6 @@ import OrderListScreen from '../screens/OrderListScreen';
 import ProfileScreen from '../screens/ProfileScreen'
 import { createStackNavigator } from '@react-navigation/stack';
 import { useAuthContext } from '../contexts/AuthContext';
-import MapCheck from '../components/MapCheck';
 
 const Stack = createStackNavigator()
 
@@ -30,7 +29,6 @@ const HomeNavigator = () => {
                 <Stack.Screen name='OrderScreen' component={OrderScreen}/> 
                 <Stack.Screen name='DestinationSearch' component={DestinationSearch}/>
                 <Stack.Screen name='SearchResults' component={SearchResults}/>
-                <Stack.Screen name='MapCheck' component={MapCheck}/>
       </Stack.Navigator>
   )
 }

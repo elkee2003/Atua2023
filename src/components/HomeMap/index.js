@@ -1,4 +1,4 @@
-import { View, Image, useWindowDimensions, PermissionsAndroid, Platform, } from 'react-native'
+import { View, ActivityIndicator, Image, useWindowDimensions, PermissionsAndroid, Platform,} from 'react-native'
 import React, {useState, useEffect} from 'react'
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
@@ -7,11 +7,8 @@ navigator.geolocation = require('@react-native-community/geolocation');
 import TMediums from '../../assets/data/TMediums';
 
 const HomeMap = () => {
+  const [myPosition, setMyPosition] = useState(null)
   
-  const {width, height} = useWindowDimensions()
-  const [myPosition, setMyPosition] = useState({})
-  // myPosition useState(null) this is what it's meant to be
-
     // useEffect Hook for Location
     useEffect(() => {
       const requestLocationPermission = async () => {
@@ -34,12 +31,9 @@ const HomeMap = () => {
   
         Geolocation.getCurrentPosition(
           (position) => {
-            console.log('This is', position)
-            setMyPosition({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-            });
-            console.log('show very', myPosition.latitude, myPosition.longitude)
+            console.log(position)
+            const {latitude, longitude}=position.coords;
+            setMyPosition({latitude,longitude})
           },
           (error) => {
             console.log(error);
@@ -65,31 +59,39 @@ const HomeMap = () => {
   }
 
   return (    
-    <MapView
-    style={{width, height:height - 150}}
-    provider={PROVIDER_GOOGLE}
-    showsUserLocation
-    followsUserLocation
-    initialRegion={{
-      latitude: 37.421998,
-      longitude: -122.084,
-      latitudeDelta: 0.0222,
-      longitudeDelta: 0.0121,
-    }}
-    >
-
+    <View>
+       {
+      myPosition ? 
+      <MapView
+      style={{width:"100%", height:"100%"}}
+      provider={PROVIDER_GOOGLE}
+      showsUserLocation
+      initialRegion={{
+      latitude: myPosition.latitude ,
+      longitude:  myPosition.longitude ,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421,
+      }}
+      >
         {TMediums.map((TMedium)=>{
-              return <Marker
-              key={TMedium.id}
-              coordinate={{ latitude : TMedium.latitude , longitude : TMedium.longitude }}>
-                <Image style={{width:50, height:70, resizeMode:'contain', transform:[{rotate:`${TMedium.heading}.deg`}]
-                      }} 
-                 image source={getImage(TMedium.type)}/>
-            </Marker>
-            })}
-
-      
-     </MapView>
+          return <Marker
+                key={TMedium.id}
+                coordinate={{ latitude : TMedium.latitude , longitude : TMedium.longitude }}>
+                  <Image style={{width:50,
+                  height:70,
+                  resizeMode:'contain',
+                  transform:[{
+                  rotate:`${TMedium.heading}.deg`
+                  }]
+                  }} 
+                image source={getImage(TMedium.type)}/>
+                </Marker>
+        })}
+      </MapView> 
+      : 
+      <ActivityIndicator size={"large"}/>
+      }
+    </View>
   )
 }
 

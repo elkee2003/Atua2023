@@ -2,8 +2,8 @@ export default [
   {
     id: '0',
     type: 'Walk',
-    latitude: 28.450627,
-    longitude: -16.263045,
+    latitude: 37.430627,
+    longitude: -122.075,
     heading: 130,
   },
   {
@@ -16,8 +16,8 @@ export default [
   {
     id: '2',
     type: 'Car',
-    latitude: 28.456208,
-    longitude: -16.259098,
+    latitude: 37.397,
+    longitude: -122.084,
     heading: 250,
   },
   {
