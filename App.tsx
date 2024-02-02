@@ -22,8 +22,14 @@ import { Amplify } from 'aws-amplify';
 //   },
 // });
 
-import awsExports from './src/aws-exports';
-Amplify.configure(awsExports);
+// This right under, I'm trying to see if it will solve my datastore error problem
+// import awsExports from './src/aws-exports';
+// Amplify.configure(awsExports);
+
+// This is the new import I'm trying
+import amplifyconfig from './src/amplifyconfiguration.json';
+Amplify.configure(amplifyconfig);
+
 
 const App = ()=>{
 

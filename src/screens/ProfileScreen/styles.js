@@ -41,27 +41,31 @@ const styles = StyleSheet.create({
         // borderWidth:1,
       },
       gContainer:{
-        height:'30%',
+        height:'8%',
         zIndex:2,
-      },
-      gTextInput:{
-        
+      }, 
+      gContainerFocused: {
+        height: '30%', // Set the desired height when typing
+        zIndex: 2,
       },
       gTextInputContainer:{
         paddingLeft:10,
         paddingRight:10,
       },
+      gTextInput: {
+        height: 60,
+      },
       glistView:{
         paddingLeft:10,
-        paddingRight:10
+        paddingRight:10,
       },
       gPoweredContainer:{
         display:'none'
       },
-      inputsBelowG:{
-        position:'relative',
-        top:-170,
-      },
+      scrnBtn:{
+        paddingTop:30,
+        paddingBottom:40,
+      }
 })
 
 export default styles;

@@ -2,15 +2,18 @@ import { View, Text, Dimensions } from 'react-native'
 import React from 'react'
 import RouteMap from '../../components/RouteMap'
 import AtuaTypes from '../../components/AtuaTypes'
+import { useLocationContext } from '../../contexts/LocationContext'
 // import { useLocationContext } from '../OrderScreen'
-import { useRoute } from '@react-navigation/native'
+// import { useRoute } from '@react-navigation/native'
 
 const SearchResults = () => {
 
   // const {originPlace,destinationPlace} = useLocationContext()
-  const route = useRoute()
-  console.log(route.params)
-  const {originPlace, destinationPlace} = route.params
+  // const route = useRoute()
+  // console.log(route.params)
+  // const {originPlace, destinationPlace} = route.params
+
+  const {originPlace, destinationPlace} = useLocationContext()
 
   return (
     <View style={{display:'flex', justifyContent:'space-between'}}>

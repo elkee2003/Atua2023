@@ -13,6 +13,7 @@ const RouteMap = ({origin, destination}) => {
     latitude:destination.details.geometry.location.lat,
     longitude:destination.details.geometry.location.lng
   }
+
   
     const GOOGLE_MAPS_APIKEY = 'AIzaSyADZ3-4KsXIvtIzbN_pqUEPq14npw6XnHY';
 
@@ -22,8 +23,8 @@ const RouteMap = ({origin, destination}) => {
        provider={PROVIDER_GOOGLE} 
        showsUserLocation={true}
        region={{
-        latitude: 28.450627,
-        longitude: -16.263045,
+        latitude: originLoc.latitude,
+        longitude: originLoc.longitude,
          latitudeDelta: 0.015,
          longitudeDelta: 0.0121,
        }}

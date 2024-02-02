@@ -8,6 +8,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawer from './CustomDrawer';
 import AuthContextProvider from '../contexts/AuthContext';
 import OrderContextProvider from '../contexts/OrderContext';
+import LocationContextProvider from '../contexts/LocationContext';
 
 const Drawer = createDrawerNavigator();
 
@@ -26,28 +27,30 @@ const RootNavigator = () => {
 
       <AuthContextProvider>
         <OrderContextProvider>
-          <Drawer.Navigator
-            drawerContent={(props)=><CustomDrawer {...props}/>} 
-            screenOptions={{headerShown:false}} >
-            
-            <Drawer.Screen name='Home' component=   {HomeNavigator}/> 
-            
-            <Drawer.Screen name="Profile" component={ProfileScreen}/>
+          <LocationContextProvider>
+            <Drawer.Navigator
+              drawerContent={(props)=><CustomDrawer {...props}/>} 
+              screenOptions={{headerShown:false}} >
+              
+              <Drawer.Screen name='Home' component=   {HomeNavigator}/> 
+              
+              <Drawer.Screen name="Profile" component={ProfileScreen}/>
 
-            <Drawer.Screen name="Your Orders" component={OrderListScreen}/>
+              <Drawer.Screen name="Your Orders" component={OrderListScreen}/>
 
-            {/* Rendering of Other Screens */}  
-            <Drawer.Screen name='Help'>
-              {()=><DummyScreen name={'ThisHelp'}/>}
-            </Drawer.Screen>
-            <Drawer.Screen name='Wallet'>
-              {()=><DummyScreen name={'ThisWallet'}/>}
-            </Drawer.Screen>
-            <Drawer.Screen name='Settings'>
-            {()=><DummyScreen name={'ThisSettings'}/>}
-            </Drawer.Screen>
+              {/* Rendering of Other Screens */}  
+              <Drawer.Screen name='Help'>
+                {()=><DummyScreen name={'ThisHelp'}/>}
+              </Drawer.Screen>
+              <Drawer.Screen name='Wallet'>
+                {()=><DummyScreen name={'ThisWallet'}/>}
+              </Drawer.Screen>
+              <Drawer.Screen name='Settings'>
+              {()=><DummyScreen name={'ThisSettings'}/>}
+              </Drawer.Screen>
 
-          </Drawer.Navigator>
+            </Drawer.Navigator>
+          </LocationContextProvider>
         </OrderContextProvider>
       </AuthContextProvider>
 

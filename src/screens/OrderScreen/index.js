@@ -1,7 +1,7 @@
 import { View, Text, TextInput, Pressable, ScrollView, TouchableWithoutFeedback,Keyboard, Alert } from 'react-native'
 import React,{useState,} from 'react'
 import styles from './styles'
-// import ReviewOrderDetails from '../../components/ReviewOrderDetails'
+import ReviewOrderDetails from '../../components/ReviewOrderDetails'
 import {DataStore} from 'aws-amplify'
 import { useAuthContext } from '../../contexts/AuthContext'
 import { Order } from '../../models'
@@ -10,11 +10,11 @@ import { useOrderContext } from '../../contexts/OrderContext'
 import { useNavigation } from '@react-navigation/native'
 
 const OrderScreen = () => {
-    // const [isShowModal, setIsShowModal]= useState(false)
+    const [isShowModal, setIsShowModal]= useState(false)
 
-    // const dismissKeyboard = () => {
-    //       Keyboard.dismiss();
-    //     };
+    const dismissKeyboard = () => {
+          Keyboard.dismiss();
+        };
 
     const {recipientName, recipientNumber, orderDetails, setRecipientName, setRecipientNumber, setOrderDetails, orders, setOrders,} = useOrderContext()
 
@@ -23,19 +23,19 @@ const OrderScreen = () => {
 
     const goToReviewOrderDetails = async ()=>{
         if(recipientName && recipientNumber.length >= 11){
-            // setIsShowModal(true)
-            const newOrder = await DataStore.save(new Order({
-                userID: dbUser.id,
-                recipientName,
-                recipientNumber,
-                orderDetails,
-                status:OrderStatus.READY_FOR_PICKUP
-            }))
-            setOrders([...orders, newOrder])
-            setRecipientName('')
-            setRecipientNumber('')
-            setOrderDetails('')
-            navigation.navigate('HomeScreen')
+            setIsShowModal(true)
+            // const newOrder = await DataStore.save(new Order({
+            //     userID: dbUser.id,
+            //     recipientName,
+            //     recipientNumber,
+            //     orderDetails,
+            //     status:OrderStatus.READY_FOR_PICKUP
+            // }))
+            // setOrders([...orders, newOrder])
+            // setRecipientName('')
+            // setRecipientNumber('')
+            // setOrderDetails('')
+            // navigation.navigate('HomeScreen')
 
         }else{
           Alert.alert('Kindly feel the fields correctly. Thank you.')
@@ -80,7 +80,7 @@ const OrderScreen = () => {
                     Done
                 </Text>
             </Pressable>
-            {/* {isShowModal && 
+            {isShowModal && 
             <ReviewOrderDetails
             recipientNameD={recipientName}
             recipientNumberD={recipientNumber}
@@ -90,7 +90,7 @@ const OrderScreen = () => {
             setRecipientNumber={setRecipientNumber}
             setOrderDetails={setOrderDetails}
             />
-            } */}
+            }
           </View>
       </TouchableWithoutFeedback>
   )

@@ -37,7 +37,7 @@ const ReviewOrderDetails = ({changeSetIsShowModalToFalse}) => {
                 status:OrderStatus.READY_FOR_PICKUP
             }))
 
-            // navigation.navigate('HomeScreen')
+            navigation.navigate('SearchResults')
             createOrder()
             setRecipientName('')
             setRecipientNumber('')

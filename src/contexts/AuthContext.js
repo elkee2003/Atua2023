@@ -1,5 +1,6 @@
 import { createContext, useState,useEffect, useContext } from "react";
-import {Auth, DataStore, Amplify, Predicates} from 'aws-amplify';
+import {Auth, Amplify, Predicates} from 'aws-amplify';
+// import { DataStore } from 'aws-amplify/datastore';
 import { User } from "../models";
   
 
@@ -21,7 +22,7 @@ const AuthContextProvider = ({children})=>{
         // Amplify.Logger.LOG_LEVEL = "DEBUG";
         // DataStore.observeQuery(User)
         // DataStore.delete(User, Predicates.ALL)
-        // DataStore.clear()
+        r
     }, [sub])
 
 

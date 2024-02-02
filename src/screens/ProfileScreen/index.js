@@ -17,7 +17,9 @@ const ProfileScreen = () => {
     const [address, setAddress] = useState(dbUser?.address || "")
     const [phoneNumber, setPhoneNumber]= useState(dbUser?.phoneNumber || "")
     const [lat, setLat] = useState(dbUser?.lat.toString() || "0")
-    const [lng, setLng] = useState (dbUser?.lng.toString() || "0")  
+    const [lng, setLng] = useState (dbUser?.lng.toString() || "0") 
+    
+    const [isFocused, setIsFocused] = useState(false);
    
     const navigation = useNavigation()
 
@@ -64,6 +66,11 @@ const ProfileScreen = () => {
       // navigation.goBack()
     }
 
+    // function to handle focus
+    const handleFocusChange = (focused) => {
+      setIsFocused(focused);
+    };
+
     // Start Of GooglePlacesAutoComplete
     const handlePlaceSelect = (data, details = null) => {
       // Extract the address from the selected place
@@ -95,10 +102,14 @@ const ProfileScreen = () => {
       style={{...styles.input, color: '#04df04'}}
       />
 
-      <View style={styles.gContainer}>
+      <View style={isFocused ? styles.gContainerFocused : styles.gContainer}>
         <GooglePlacesAutocomplete
         placeholder='Select Address From Here'
         onPress={handlePlaceSelect}
+        textInputProps={{
+          onFocus:() => handleFocusChange(true),
+          onBlur:() => handleFocusChange(false)
+        }} 
         styles={{
           textInput:styles.gTextInput,
           textInputContainer:styles.gTextInputContainer,
@@ -112,32 +123,32 @@ const ProfileScreen = () => {
         />
       </View>
 
-      {/* TextInputs that will be below GooglePlacesAutocomplete */}
-      <View style={styles.inputsBelowG}>
-        <TextInput
-        value={phoneNumber}
-        onChangeText={setPhoneNumber}
-        placeholder='Phone Number'
-        style={styles.input}
-        />
+    {/* TextInputs that will be below GooglePlacesAutocomplete */}
+    
+      <TextInput
+      value={phoneNumber}
+      onChangeText={setPhoneNumber}
+      placeholder='Phone Number'
+      style={styles.input}
+      />
 
-        <TextInput 
-        value={lat}
-        onChangeText={setLat}
-        placeholder='Latitude'
-        keyboardType='numeric'
-        style={styles.input}
-        />
+      <TextInput 
+      value={lat}
+      onChangeText={setLat}
+      placeholder='Latitude'
+      keyboardType='numeric'
+      style={styles.input}
+      />
 
-        <TextInput 
-        value={lng}
-        onChangeText={setLng}
-        placeholder='Longitude'
-        keyboardType='numeric'
-        style={styles.input}
-        />
-        
+      <TextInput 
+      value={lng}
+      onChangeText={setLng}
+      placeholder='Longitude'
+      keyboardType='numeric'
+      style={styles.input}
+      />
 
+      <View style={styles.scrnBtn}>
         {/* Save */}
         <Pressable onPress={onSave
         } style={styles.saveBackground}>

@@ -4,6 +4,7 @@ import styles from './styles'
 import PlaceRow from './placeRow';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useNavigation } from '@react-navigation/native';
+import { useLocationContext } from '../../contexts/LocationContext';
 
 
 const homePlace = {
@@ -17,8 +18,9 @@ const workPlace = {
 
 
 const DestinationSearch = () => {
-    const [originPlace, setOriginPlace] = useState(null);
-    const [destinationPlace, setDestinationPlace]= useState(null)
+    // const [originPlace, setOriginPlace] = useState(null);
+    // const [destinationPlace, setDestinationPlace]= useState(null)
+    const {originPlace, destinationPlace, setOriginPlace, setDestinationPlace} = useLocationContext()
 
     const navigation = useNavigation();
 
